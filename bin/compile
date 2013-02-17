@@ -11,6 +11,8 @@ set -eo pipefail
 # Prepend proper path for virtualenv hackery. This will be deprecated soon.
 export PATH=:/usr/local/bin:$PATH
 
+COMMIT_HASH=`git rev-parse --short HEAD`
+
 # Paths.
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 ROOT_DIR=$(dirname $BIN_DIR)
@@ -177,6 +179,7 @@ set-default-env LANG en_US.UTF-8
 set-default-env PYTHONHASHSEED random
 set-default-env PYTHONPATH /app/
 
+echo $COMMIT_HASH > commit.txt
 
 # Experimental post_compile hook.
 source $BIN_DIR/steps/hooks/post_compile
